@@ -1,0 +1,12 @@
+create_table("jobs") {
+	t.Column("id", "uuid", {primary: true})
+	t.Column("company_name", "string", {})
+	t.Column("job_name", "string", {})
+	t.Column("area", "string", {})
+	t.Column("welfare", "string", {})
+	t.Column("j", "string", {})
+	t.Column("c", "string", {})
+	t.Column("job_cat", "string", {})
+	t.Column("sal_low", "integer", {})
+	t.Column("sal_high", "integer", {})
+}
