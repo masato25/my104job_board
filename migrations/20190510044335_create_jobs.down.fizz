@@ -1,1 +1,2 @@
+drop_index("jobs", "job_j_c_unique")
 drop_table("jobs")

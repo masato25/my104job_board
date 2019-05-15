@@ -23,6 +23,12 @@ type Job struct {
 	JobCat      string    `json:"job_cat" db:"job_cat"`
 	SalLow      int       `json:"sal_low" db:"sal_low"`
 	SalHigh     int       `json:"sal_high" db:"sal_high"`
+	DESCRIPTION string    `json:"description" db:"description"`
+	OtherDes    string    `json:"other_des" db:"other_des"`
+	Profile     string    `json:"profile" db:"profile"`
+	Link        string    `json:"link" db:"link"`
+	Manager     bool      `json:"manager" db:"manager"`
+	NeedOnBt    bool      `json:"need_on_bt" db:"need_on_bt"`
 }
 
 // String is not required by pop and may be deleted

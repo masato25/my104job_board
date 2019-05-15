@@ -28,12 +28,18 @@ CREATE TABLE public.jobs (
     company_name character varying(255) NOT NULL,
     job_name character varying(255) NOT NULL,
     area character varying(255) NOT NULL,
-    welfare character varying(255) NOT NULL,
+    welfare text NOT NULL,
     j character varying(255) NOT NULL,
     c character varying(255) NOT NULL,
     job_cat character varying(255) NOT NULL,
     sal_low integer NOT NULL,
     sal_high integer NOT NULL,
+    description text NOT NULL,
+    other_des text NOT NULL,
+    profile text NOT NULL,
+    link character varying(255) NOT NULL,
+    manager boolean NOT NULL,
+    need_on_bt boolean NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -58,6 +64,13 @@ ALTER TABLE public.schema_migration OWNER TO postgres;
 
 ALTER TABLE ONLY public.jobs
     ADD CONSTRAINT jobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: job_j_c_unique; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX job_j_c_unique ON public.jobs USING btree (j, c);
 
 
 --
