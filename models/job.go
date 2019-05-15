@@ -20,6 +20,7 @@ type Job struct {
 	Welfare     string    `json:"welfare" db:"welfare"`
 	J           string    `json:"j" db:"j"`
 	C           string    `json:"c" db:"c"`
+	Cat         string    `json:"cat" db:"cat"`
 	JobCat      string    `json:"job_cat" db:"job_cat"`
 	SalLow      int       `json:"sal_low" db:"sal_low"`
 	SalHigh     int       `json:"sal_high" db:"sal_high"`
@@ -56,6 +57,7 @@ func (j *Job) Validate(tx *pop.Connection) (*validate.Errors, error) {
 		&validators.StringIsPresent{Field: j.Welfare, Name: "Welfare"},
 		&validators.StringIsPresent{Field: j.J, Name: "J"},
 		&validators.StringIsPresent{Field: j.C, Name: "C"},
+		&validators.StringIsPresent{Field: j.Cat, Name: "Cat"},
 		&validators.StringIsPresent{Field: j.JobCat, Name: "JobCat"},
 		&validators.IntIsPresent{Field: j.SalLow, Name: "SalLow"},
 		&validators.IntIsPresent{Field: j.SalHigh, Name: "SalHigh"},

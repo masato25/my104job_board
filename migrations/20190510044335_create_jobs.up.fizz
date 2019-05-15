@@ -13,6 +13,7 @@ create_table("jobs") {
   t.Column("other_des", "text", {})
   t.Column("profile", "text", {})
   t.Column("link", "string", {})
+	t.Column("cat", "string", {})
   t.Column("manager", "boolean", {})
   t.Column("need_on_bt", "boolean", {})
 }

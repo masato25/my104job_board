@@ -38,6 +38,7 @@ CREATE TABLE public.jobs (
     other_des text NOT NULL,
     profile text NOT NULL,
     link character varying(255) NOT NULL,
+    cat character varying(255) NOT NULL,
     manager boolean NOT NULL,
     need_on_bt boolean NOT NULL,
     created_at timestamp without time zone NOT NULL,
