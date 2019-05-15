@@ -6,6 +6,8 @@ const ManifestPlugin = require("webpack-manifest-plugin");
 const CleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const LiveReloadPlugin = require('webpack-livereload-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const path = require('path');
 
 const configurator = {
   entries: function(){
@@ -43,7 +45,8 @@ const configurator = {
       new MiniCssExtractPlugin({filename: "[name].[contenthash].css"}),
       new CopyWebpackPlugin([{from: "./assets",to: ""}], {copyUnmodified: true,ignore: ["css/**", "js/**", "src/**"] }),
       new Webpack.LoaderOptionsPlugin({minimize: true,debug: false}),
-      new ManifestPlugin({fileName: "manifest.json"})
+      new ManifestPlugin({fileName: "manifest.json"}),
+      new VueLoaderPlugin(),
     ];
 
     return plugins
@@ -53,7 +56,7 @@ const configurator = {
     return {
       rules: [
         {
-          test: /\.s[ac]ss$/,
+          test: /\.(s[ac]ss|css)$/,
           use: [
             MiniCssExtractPlugin.loader,
             { loader: "css-loader", options: {sourceMap: true}},
@@ -61,11 +64,16 @@ const configurator = {
           ]
         },
         { test: /\.tsx?$/, use: "ts-loader", exclude: /node_modules/},
+        {test: /\.vue/, loader: "vue-loader"},
         { test: /\.jsx?$/,loader: "babel-loader",exclude: /node_modules/ },
         { test: /\.(woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/,use: "url-loader"},
         { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,use: "file-loader" },
         { test: require.resolve("jquery"),use: "expose-loader?jQuery!expose-loader?$"},
-        { test: /\.go$/, use: "gopherjs-loader"}
+        { test: /\.go$/, use: "gopherjs-loader"},
+        {
+          test: /\.pug$/,
+          loader: 'pug-plain-loader'
+        }
       ]
     }
   },
@@ -83,6 +91,10 @@ const configurator = {
       plugins: configurator.plugins(),
       module: configurator.moduleOptions(),
       resolve: {
+        alias: {
+          'vue$': 'vue/dist/vue.esm.js',
+          '~': path.resolve(__dirname, 'assets/js'),
+        },
         extensions: ['.ts', '.js', '.json']
       }
     }
