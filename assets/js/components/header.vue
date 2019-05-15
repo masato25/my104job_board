@@ -29,17 +29,17 @@ export default {
     this.satmp = this.$store.state.salarym;
   },
   methods: {
-    selectIcat() {
-      this.setIcat(this.myicat)
+    selectIcat(myicat) {
+      this.setIcat({icat: myicat})
     },
-    handleChangeSal(){
-      this.setSalary(this.satmp)
+    handleChangeSal(satmp){
+      this.setSalary({salary: satmp})
     },
     ...mapActions({
       setIcat: 'setIcat',
       setSalary: 'setSalary',
     })
   },
-  computed: mapState(['salarym','icats', 'cat']),
+  computed: mapState(['salarym','icats']),
 }
 </script>

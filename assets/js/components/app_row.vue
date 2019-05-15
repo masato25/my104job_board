@@ -15,16 +15,18 @@
               el-table-column(prop="job_name" label="job_name")
               el-table-column(prop="company_name" label="company_name")
                 template(scope="scope")
-                  span
-                    a(:href="scope.row.link" target="_blank")
+                  span(v-if="scope.row.link")
+                    a(:href="urlwithhttp(scope.row.link)" target="_blank")
                       | {{ scope.row.company_name }}
+                  span(v-if="!scope.row.link")
+                    | {{ scope.row.company_name }}
               el-table-column(prop="sal_low" label="sal_low")
               el-table-column(prop="sal_high" label="sal_high")
               el-table-column(prop="area" label="area")
         el-row
           el-col(:span=6)
             .grid-conten.bg-purple
-              |total: {{total}} / page: {{currentPage + 1}}
+              |total: {{totalpage}} / page: {{currentPage}}
           el-col(:span=18)
             .block
               el-pagination(
@@ -33,7 +35,7 @@
                   @size-change="handleSizeChange"
                   @current-change="handlePageChange"
                   layout="sizes, prev, pager, next"
-                  :total="total")
+                  :total="totalpage")
 </template>
 
 <script>
@@ -46,18 +48,25 @@ export default {
     'AppHeader': AppHeader
   },
   data:() => {
-    return {}
+    return {
+    }
   },
   mounted: function(){
     this.getJobs();
   },
-  computed: mapState(['jobs', 'total', 'currentPage', 'limit', 'loading']),
+  computed: mapState(['currentPage', 'limit', 'loading', 'totalpage', 'jobs', 'cat']),
   methods: {
-   handleSizeChange(page) {
-     this.setCurrentPage({page: page})
+   handlePageChange(page) {
+     this.setCurrentPage({page: page+1})
    },
-   handlePageChange(sizeChange) {
+   handleSizeChange(sizeChange) {
      this.setPageShowLimit({limit: sizeChange})
+   },
+   urlwithhttp(uri){
+     if(!uri.startsWith("http")){
+       uri = "http://" + uri;
+     }
+     return uri
    },
    ...mapActions(['getJobs', 'setPageShowLimit', 'setCurrentPage'])
   }

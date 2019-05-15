@@ -1,7 +1,8 @@
 const mutations = {
   SET_JOBS_LIST(state, { list }){
-    state.jobs = list.jobs
-    state.total = list.count
+    state.jobs = list.data
+    state.totalpage = list.pagging.total_entries_size
+    state.currentPage = list.pagging.page
   },
   SET_PAGE_Limit(state, { limit }){
     state.limit = limit
@@ -13,7 +14,9 @@ const mutations = {
     state.loading = !state.loading
   },
   SET_ICAT(state, {icat}){
-    state.cat = icat
+    if(icat){
+      state.cat = icat
+    }
   },
   SET_SAL(state, {salary}){
     state.salarym = salary

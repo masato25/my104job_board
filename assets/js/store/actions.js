@@ -1,17 +1,12 @@
 import axios from 'axios';
 
 const actions = {
-    getJobs({ commit, state }, params){
+    getJobs({ commit, state }){
       let cat = state.cat
       let limit = state.limit
       let salarym = state.salarym
-      if (params != undefined){
-        cat =  params["cat"] || state.cat
-        limit =  params["limit"] || state.limit
-        salarym =  params["salary"] || state.salarym
-      }
       commit('SET_LOADING')
-      axios.get(`/api/jobs?cat=${cat}&limit=${limit}&page=${state.currentPage}&salary=${salarym}`).then((response) => {
+      axios.get(`/api/jobs?cat=${cat}&per_page=${limit}&page=${state.currentPage}&salary=${salarym}`).then((response) => {
          commit('SET_JOBS_LIST', { list: response.data })
          commit('SET_LOADING')
        }, (err) => {
@@ -26,11 +21,13 @@ const actions = {
       commit('SET_PAGE_Limit', {limit})
       dispatch('getJobs')
     },
-    setIcat({ commit, state }, {icat}){
+    setIcat({ commit, dispatch}, {icat}){
       commit('SET_ICAT', {icat})
+      dispatch('getJobs')
     },
-    setSalary({commit}, {salary}){
+    setSalary({commit, dispatch}, {salary}){
       commit('SET_SAL', {salary})
+      dispatch('getJobs')
     }
 }
 
