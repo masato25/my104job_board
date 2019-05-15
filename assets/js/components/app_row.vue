@@ -9,7 +9,6 @@
             el-table(
                 :data="jobs"
                 v-loading.body="loading"
-                height="500"
                 style="width: 100%")
               el-table-column(prop="updated_at" label="updated_at")
               el-table-column(prop="job_name" label="job_name")
