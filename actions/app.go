@@ -59,7 +59,7 @@ func App() *buffalo.App {
 		app.Use(translations())
 
 		app.GET("/", HomeHandler)
-
+		app.GET("/api/jobs", JobQuery)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 
