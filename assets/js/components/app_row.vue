@@ -15,7 +15,7 @@
                 el-table-column(prop="updated_at" label="更新時間")
                 el-table-column(prop="job_name" label="職缺名稱")
                 el-table-column(prop="company_name" label="公司名稱")
-                  template(scope="scope")
+                  template(slot-scope="scope")
                     span(v-if="scope.row.link")
                       a(:href="urlwithhttp(scope.row.link)" target="_blank")
                         | {{ scope.row.company_name }}
