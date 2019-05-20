@@ -11,14 +11,40 @@ import (
 	"strings"
 	"time"
 
+	"github.com/gofrs/uuid"
 	"github.com/markbates/grift/grift"
 	m "github.com/masato25/my104job_board/models"
 	"github.com/masato25/my104job_board/models/dataobj"
 	log "github.com/sirupsen/logrus"
 )
 
+var timeparseLayout string = "20060102150405"
+
+func setJobInfo(jb m.Job, d dataobj.Api104Record, cat string) m.Job {
+	salHight, _ := strconv.Atoi(d.SalMonthHIGH)
+	salLow, _ := strconv.Atoi(d.SalMonthLOW)
+	parsedTime, _ := time.Parse(timeparseLayout, d.AppearTIME)
+	jb.Area = d.AddrNoDESCRIPT
+	jb.C = d.C
+	jb.CompanyName = d.NAME
+	jb.CreatedAt = parsedTime
+	jb.J = d.J
+	jb.Cat = cat
+	jb.JobCat = d.JobcatDESCRIPT
+	jb.JobName = d.JOB
+	jb.SalHigh = salHight
+	jb.SalLow = salLow
+	jb.Welfare = d.WELFARE
+	jb.DESCRIPTION = d.DESCRIPTION
+	jb.OtherDes = d.DESCRIPTION
+	jb.Profile = d.PROFILE
+	jb.Link = d.LINK
+	jb.Manager = d.S2 == "1"
+	jb.NeedOnBt = d.S3 == "1"
+	return jb
+}
+
 func getDataThanInsertToDB(c *grift.Context, cat string) (err error) {
-	timeparseLayout := "20060102150405"
 	totalpage := 1
 	for currentpage := 1; currentpage <= totalpage; currentpage++ {
 		url := fmt.Sprintf("http://www.104.com.tw/i/apis/jobsearch.cfm?cat=%s&sltp=S&slmin=50000&slmax=150000&fmt=8&page=%d&pgsz=25", cat, currentpage)
@@ -31,39 +57,17 @@ func getDataThanInsertToDB(c *grift.Context, cat string) (err error) {
 		var b dataobj.Api104Response
 		err = json.Unmarshal(bytebody, &b)
 		totalpage, _ = strconv.Atoi(b.TOTALPAGE)
-		jobs := m.Jobs{}
 		for _, d := range b.DATA {
-			salHight, _ := strconv.Atoi(d.SalMonthHIGH)
-			salLow, _ := strconv.Atoi(d.SalMonthLOW)
-			parsedTime, _ := time.Parse(timeparseLayout, d.AppearTIME)
-			jb := m.Job{
-				Area:        d.AddrNoDESCRIPT,
-				C:           d.C,
-				CompanyName: d.NAME,
-				CreatedAt:   parsedTime,
-				J:           d.J,
-				Cat:         cat,
-				JobCat:      d.JobcatDESCRIPT,
-				JobName:     d.JOB,
-				SalHigh:     salHight,
-				SalLow:      salLow,
-				Welfare:     d.WELFARE,
-				DESCRIPTION: d.DESCRIPTION,
-				OtherDes:    d.DESCRIPTION,
-				Profile:     d.PROFILE,
-				Link:        d.LINK,
-				Manager:     d.S2 == "1",
-				NeedOnBt:    d.S3 == "1",
+			jb := m.Job{}
+			m.DB.Where("j = ? and c = ?", d.J, d.C).First(&jb)
+			if jb.ID == uuid.Nil {
+				jb = setJobInfo(jb, d, cat)
 			}
-			jobs = append(jobs, jb)
-		}
-		for _, j := range jobs {
-			err = m.DB.Create(&j)
+			err = m.DB.Save(&jb)
 			if err != nil {
 				log.Error(err.Error())
 			}
 		}
-		jobs = m.Jobs{}
 		log.Infof("totallpage: %d currentpage: %d", totalpage, currentpage)
 	}
 	return
