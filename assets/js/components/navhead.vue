@@ -15,6 +15,11 @@ export default {
 <style lang="scss">
 .el-menu {
   background-color: #545c64;
+  i {
+    color: aquamarine;
+    margin-bottom: 8px;
+    font-size: 25px;
+  }
   .el-menu-item {
     color: #ecd611;
     font-weight: 600;
