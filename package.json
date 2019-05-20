@@ -16,7 +16,8 @@
     "vue-i18n": "^8.11.2",
     "vue-loader": "^15.7.0",
     "vue-router": "^3.0.2",
-    "vue-template-compiler": "^2.6.7"
+    "vue-template-compiler": "^2.6.7",
+    "tar": ">=4.4.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
