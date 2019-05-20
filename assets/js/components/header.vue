@@ -1,7 +1,6 @@
 <template lang="pug">
-  el-card(class="box-card")
-    el-row
-      el-col(:span=5)
+    el-row(class="search-cond")
+      el-col(:span=3)
         el-select(v-model="myicat" filterable placeholder="Select" @change="selectIcat")
           el-option(
               v-for="item in icats"
@@ -9,7 +8,7 @@
               :label="item[1]"
               :value="item[0]"
             )
-      el-col(:span=4)
+      el-col(:span=6)
         el-input-number(@change="handleChangeSal" :min=0 :max=1000000 v-model="satmp")
 </template>
 
@@ -43,3 +42,10 @@ export default {
   computed: mapState(['salarym','icats']),
 }
 </script>
+<style lang="scss">
+.search-cond {
+  .el-col {
+    margin-right: 10px;
+  }
+}
+</style>
