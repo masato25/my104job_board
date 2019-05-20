@@ -12,22 +12,22 @@
                   :data="jobs"
                   v-loading.body="loading"
                   style="width: 100%")
-                el-table-column(prop="updated_at" label="updated_at")
-                el-table-column(prop="job_name" label="job_name")
-                el-table-column(prop="company_name" label="company_name")
+                el-table-column(prop="updated_at" label="更新時間")
+                el-table-column(prop="job_name" label="職缺名稱")
+                el-table-column(prop="company_name" label="公司名稱")
                   template(scope="scope")
                     span(v-if="scope.row.link")
                       a(:href="urlwithhttp(scope.row.link)" target="_blank")
                         | {{ scope.row.company_name }}
                     span(v-if="!scope.row.link")
                       | {{ scope.row.company_name }}
-                el-table-column(prop="sal_low" label="sal_low")
-                el-table-column(prop="sal_high" label="sal_high")
-                el-table-column(prop="area" label="area")
+                el-table-column(prop="sal_low" label="最低薪")
+                el-table-column(prop="sal_high" label="最高薪")
+                el-table-column(prop="area" label="地區")
           el-row
             el-col(:span=6)
               .grid-conten.bg-purple
-                |total: {{totalpage}} / page: {{currentPage}}
+                |筆數: {{totalpage}} / 頁數: {{currentPage}}
             el-col(:span=18)
               .block
                 el-pagination(
