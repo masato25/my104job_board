@@ -56,7 +56,9 @@ func getDataThanInsertToDB(c *grift.Context, cat string) (err error) {
 		bytebody, err := ioutil.ReadAll(resp.Body)
 		var b dataobj.Api104Response
 		err = json.Unmarshal(bytebody, &b)
-		totalpage, _ = strconv.Atoi(b.TOTALPAGE)
+		if totalpage == 1 {
+			totalpage, _ = strconv.Atoi(b.TOTALPAGE)
+		}
 		for _, d := range b.DATA {
 			jb := m.Job{}
 			m.DB.Where("j = ? and c = ?", d.J, d.C).First(&jb)
