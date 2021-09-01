@@ -17,7 +17,7 @@
     "vue-loader": "^15.7.0",
     "vue-router": "^3.0.2",
     "vue-template-compiler": "^2.6.7",
-    "tar": ">=4.4.2"
+    "tar": ">=4.4.18"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
