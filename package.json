@@ -32,7 +32,7 @@
     "file-loader": "~2.0.0",
     "gopherjs-loader": "^0.0.1",
     "mini-css-extract-plugin": "^0.4.2",
-    "node-sass": "~4.9.0",
+    "node-sass": "~7.0.0",
     "npm-install-webpack-plugin": "4.0.5",
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",
