@@ -13,10 +13,6 @@ func init() {
 		// HTML layout to be used for all HTML requests:
 		HTMLLayout: "application.html",
 
-		// Box containing all of the templates:
-		TemplatesBox: packr.New("app:templates", "../templates"),
-		AssetsBox:    assetsBox,
-
 		// Add template helpers here:
 		Helpers: render.Helpers{
 			// uncomment for non-Bootstrap form helpers:
