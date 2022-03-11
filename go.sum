@@ -1034,8 +1034,6 @@ github.com/markbates/safe v1.0.1/go.mod h1:nAqgmRi7cY2nqMc92/bSEeQA+R4OheNU2T1kN
 github.com/markbates/sigtx v1.0.0 h1:y/xtkBvNPRjD4KeEplf4w9rJVSc23/xl+jXYGowTwy0=
 github.com/markbates/sigtx v1.0.0/go.mod h1:QF1Hv6Ic6Ca6W+T+DL0Y/ypborFKyvUY9HmuCD4VeTc=
 github.com/markbates/willie v1.0.9/go.mod h1:fsrFVWl91+gXpx/6dv715j7i11fYPfZ9ZGfH0DQzY7w=
-github.com/masato25/my104job_board v0.0.0-20190610070024-348ecd40bef8 h1:PnTVvpjbTJiuAUdlG/AN/BmSkrWUCP+YFurgsgKtcgs=
-github.com/masato25/my104job_board v0.0.0-20190610070024-348ecd40bef8/go.mod h1:Mh5lgfRicDsaf9icP0VOSKl0emDKc9jXFzwLTi9U4dc=
 github.com/mattn/go-colorable v0.0.9/go.mod h1:9vuHe8Xs5qXnSaW/c/ABM9alt+Vo+STaOChaDxuIBZU=
 github.com/mattn/go-colorable v0.1.0/go.mod h1:9vuHe8Xs5qXnSaW/c/ABM9alt+Vo+STaOChaDxuIBZU=
 github.com/mattn/go-colorable v0.1.1/go.mod h1:FuOcm+DKB9mbwrcAfNl7/TZVBZ6rcnceauSikq3lYCQ=

@@ -1,4 +1,4 @@
-module my104job_board
+module github.com/masato25/my104job_board
 
 go 1.16
 
@@ -13,11 +13,11 @@ require (
 	github.com/gobuffalo/packr v1.30.1
 	github.com/gobuffalo/packr/v2 v2.8.3
 	github.com/gobuffalo/pop v4.13.1+incompatible
+	github.com/gobuffalo/pop/v5 v5.3.0
 	github.com/gobuffalo/suite v2.8.2+incompatible
 	github.com/gobuffalo/validate v2.0.4+incompatible
 	github.com/gofrs/uuid v4.2.0+incompatible
 	github.com/markbates/grift v1.5.0
-	github.com/masato25/my104job_board v0.0.0-20190610070024-348ecd40bef8
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.8.1
 	github.com/unrolled/secure v1.10.0
